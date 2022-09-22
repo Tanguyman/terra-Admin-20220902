@@ -641,7 +641,7 @@ try {
           Sales By Category | Options
       ==================================
   */
-
+/*
  if (Cookies.getCookie('dark_mode') != "") {
     var options = {
       chart: {
@@ -844,6 +844,7 @@ try {
 }
   
 }
+*/
   /*
       ==============================
       |    @Render Charts Script    |
@@ -884,13 +885,14 @@ try {
           Sales By Category | Render
       =================================
   */
+  /*
   var chart = new ApexCharts(
       document.querySelector("#chart-2"),
       options
   );
   
   chart.render();
-  
+  */
   /*
       =============================================
           Perfect Scrollbar | Recent Activities

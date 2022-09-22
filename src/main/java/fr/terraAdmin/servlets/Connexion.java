@@ -39,6 +39,12 @@ public class Connexion extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		HttpSession session = request.getSession(true);
+		String names[] = session.getValueNames();
+		for ( int i = 0, n = names.length; i < n; i++ ) {
+			String key = names[i];
+			System.out.println("Session key (Index servlet) : " + key + " -> Session value : " + session.getValue(key));
+		}
+		
 		Database.Connect();
 		
 		if (request.getParameter("buttonConnection") != null) {
@@ -46,7 +52,6 @@ public class Connexion extends HttpServlet {
 			// Récupérer les paramètres du Header (POST)
 			String mail = request.getParameter("username");
 			String password = request.getParameter("password");
-//			System.out.println(mail + password);
 
 			// TEST DE SÉCURITÉ
 			try {
@@ -65,9 +70,9 @@ public class Connexion extends HttpServlet {
 						response.sendRedirect("Index");
 					} else {
 						session.setAttribute("isConnected", true);
-						session.setAttribute("messageConnexion", "Vers un autre serveur ou je code l’app ici ?");
-						session.setAttribute("userTerra", aBean);
-						response.sendRedirect("Index");						
+						session.setAttribute("aBean", aBean);
+						session.removeAttribute("messageConnexion");
+						response.sendRedirect("Dashboard");						
 					}
 
 				} else {
@@ -96,9 +101,6 @@ public class Connexion extends HttpServlet {
 								+ "Sinon, veuillez contacter l’administrateur.";
 						session.setAttribute("messageConnexion", msg);
 						
-//						System.out.println("Archiver l’admin : " + aBean);
-						boolean aBean2 = aDao.isMailInDatabase(mail);
-						System.out.println("Archiver l’admin : " + aBean);
 						if ( aDao.isMailInDatabase(mail) ) {
 							aDao.blockAccount(mail);
 						}

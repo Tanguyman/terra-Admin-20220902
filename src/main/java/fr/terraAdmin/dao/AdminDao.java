@@ -184,10 +184,18 @@ public class AdminDao {
 
 			ps.executeUpdate();
 			connexion.commit();
+			System.out.println("SAVED OK");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("SAVED NO");
+			try {
+				if (connexion != null) {
+					connexion.rollback();
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			throw new DaoException("Impossible de communiquer avec la base de données.");
 		}
 	}

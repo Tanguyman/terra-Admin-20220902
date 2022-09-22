@@ -8,16 +8,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Footer
  */
-public class Index extends HttpServlet {
-	
+public class Footer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public Footer() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,7 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.getRequestDispatcher("connexion.jsp").forward(request, response);
+		request.getRequestDispatcher("/footer.jsp").include(request, response);
 	}
 
 	/**

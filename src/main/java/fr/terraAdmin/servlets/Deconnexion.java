@@ -6,18 +6,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Deconnexion
  */
-public class Index extends HttpServlet {
-	
+public class Deconnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public Deconnexion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,12 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.getRequestDispatcher("connexion.jsp").forward(request, response);
+		HttpSession session = request.getSession(true);
+		
+		session.removeAttribute("aBean");
+		session.removeAttribute("isConnected");
+		
+		response.sendRedirect("Index");
 	}
 
 	/**

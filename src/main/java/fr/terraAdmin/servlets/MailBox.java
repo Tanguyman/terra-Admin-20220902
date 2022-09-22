@@ -8,16 +8,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class MailBox
  */
-public class Index extends HttpServlet {
-	
+public class MailBox extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public MailBox() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +28,9 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		request.getRequestDispatcher("connexion.jsp").forward(request, response);
+	
+		request.setAttribute("activeGestionAbonnes", "active");
+		request.getRequestDispatcher("mailBox.jsp").forward(request, response);
 	}
 
 	/**

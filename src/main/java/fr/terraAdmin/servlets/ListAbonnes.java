@@ -1,23 +1,27 @@
 package fr.terraAdmin.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import fr.terraAdmin.beans.ClientsTerraBean;
+import fr.terraAdmin.dao.ClientsTerraDao;
+import fr.terraAdmin.dao.DaoException;
+import fr.terraAdmin.dao.Database;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class ListAbonnes
  */
-public class Index extends HttpServlet {
-	
+public class ListAbonnes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public ListAbonnes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +34,24 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.getRequestDispatcher("connexion.jsp").forward(request, response);
+		Database.Connect();
+		ClientsTerraDao ctDao = new ClientsTerraDao();
+		try {
+			ArrayList<ClientsTerraBean> ctBeanCol = ctDao.getAll();
+			// System.out.println(ctBeanCol);
+			request.setAttribute("ctBeanCol", ctBeanCol);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Dans la servlet ListAbonnes : " + e.getMessage());
+			// Dans le site vitrine dire site en maintenance
+			// Dans l’app ou le back office du site vitrine dire contacter le service
+			// technique
+			// m’envoyer un mail car je suis le dév donc le service technique
+		}
+		
+		request.setAttribute("activeGestionAbonnes", "active");
+		request.getRequestDispatcher("listeAbonnes.jsp").forward(request, response);
 	}
 
 	/**

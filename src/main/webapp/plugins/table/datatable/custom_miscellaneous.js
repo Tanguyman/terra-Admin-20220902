@@ -90,7 +90,7 @@ $(document).ready(function() {
         },
         buttons: [
             {
-                text: 'Name',
+                text: 'toto',
                 className: 'btn btn-primary btn-sm toggle-vis mb-1',
                 action: function(e, dt, node, config ) {
                     var column = table.column( 0 );

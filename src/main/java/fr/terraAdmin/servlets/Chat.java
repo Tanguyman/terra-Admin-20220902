@@ -8,16 +8,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Chat
  */
-public class Index extends HttpServlet {
-	
+public class Chat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public Chat() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,8 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.getRequestDispatcher("connexion.jsp").forward(request, response);
+		request.setAttribute("activeGestionAbonnes", "active");
+		request.getRequestDispatcher("chat.jsp").forward(request, response);
 	}
 
 	/**
