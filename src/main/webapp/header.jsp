@@ -13,7 +13,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="Dashboard"><img alt="logo" src="assets/img/90x90.jpg"> <span class="navbar-brand-name">TERRA</span></a>
+                <a class="navbar-brand" href="Dashboard"><img alt="logo" src="${ terra.logoURL }" style="width: 90px; height: 70px;"> <span class="navbar-brand-name">${ terra.nom }</span></a>
             </div>
 
             <ul class="navbar-item topbar-navigation">
@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li class="nav-item theme-text">
-                                <a href="Dashboard" class="nav-link"> Terra </a><!-- Menu burger (mobil) -->
+                                <a href="Dashboard" class="nav-link"> ${ terra.nom } </a><!-- Menu burger (mobil) -->
                             </li>
                         </ul>
 
@@ -83,7 +83,10 @@
                                     <li>
                                         <a href="ListAbonnes">Liste des abonnés</a>
                                     </li>
-                                    <li class="sub-sub-submenu-list">
+                                    <li>
+                                        <a href="ListeDesinscriptions">Liste des désinscriptions</a>
+                                    </li>
+                                    <!-- <li class="sub-sub-submenu-list">
                                         <a href="#appInvoice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Abonnements <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
                                         <ul class="collapse list-unstyled sub-submenu animated fadeInUp" id="appInvoice" data-parent="#appInvoice">
                                             <li>
@@ -99,23 +102,24 @@
                                                 <a href="apps_invoice-edit.html"> Edit </a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <!-- <li>
                                         <a href="apps_calendar.html"> Calendar</a>
                                     </li> -->
                                 </ul>
                             </li>
                             
-                            <li class="menu single-menu">
-                                <a href="#components" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <li class="menu single-menu ${ activeGestionFront }">
+                            	
+                                <a href="GestionFront">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
                                         
                                         <span>Gestion Front</span>
                                     </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> -->
                                 </a>
-                                <ul class="collapse submenu list-unstyled animated fadeInUp" id="components" data-parent="#topAccordion">
+                                <!-- <ul class="collapse submenu list-unstyled animated fadeInUp" id="components" data-parent="#topAccordion">
                                     <li>
                                         <a href="#"> Slider </a>
                                     </li>
@@ -131,7 +135,7 @@
                                     <li>
                                         <a href="#">Coordonnées</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                         </ul>
                     </nav>

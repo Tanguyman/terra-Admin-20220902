@@ -11,7 +11,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Liste des abonnés</title>
+    <title>Liste des désinscris</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
     <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/loader.js"></script>
@@ -61,7 +61,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
                 <div class="page-header">
                     <nav class="breadcrumb-one" aria-label="breadcrumb">
                         <div class="title">
-                            <h3>Liste des abonnés</h3>
+                            <h3>Liste des désinscris</h3>
                         </div>
                         <!-- <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
@@ -205,7 +205,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
 	                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
 	                                                    <a class="dropdown-item" href="#">Modifier</a>
 	                                                    <a class="dropdown-item" href="#">Supprimer</a>
-	                                                    <a class="dropdown-item" href="#">Archiver / Désinscrire</a>
+	                                                    <a class="dropdown-item" href="#">Réinscrire</a>
 	                                                    <div class="dropdown-divider"></div>
 	                                                    <a class="dropdown-item" href="#">Separated link</a>
 	                                                </div>
@@ -469,7 +469,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
                             </form>
                         </div>
                         <div class="modal-footer" style="justify-content: space-between;">
-                            <button id="archiverClient" type="button" class="btn btn-danger"><i class="flaticon-cancel-12"></i>Archiver / Désinscrire</button> <!-- data-dismiss="modal" -->
+                            <button id="archiverClient" type="button" class="btn btn-success"><i class="flaticon-cancel-12"></i>Réinscrire</button> <!-- data-dismiss="modal" -->
                             <button id="mettreAJourClient" type="button" class="btn btn-primary">Mettre à jour</button>
                             <%-- <tr onclick="show('<%= ct.getId() %>')"> --%>
                         </div>
@@ -518,6 +518,10 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
     
     <script type="text/javascript">
 
+    function setDatatable(o) {
+    	console.log( o );
+    }
+    
     function setModal(o) {
     	console.log( o );
     	
@@ -595,6 +599,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
     	$("#alertSuccess").remove();
     	$("#exampleModal").modal();
     };
+    
     function show(n) {
         /* alert(n); */
         /* $("#alertSuccess").remove(); */
@@ -625,6 +630,25 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
 		
 		$("#alertSuccess").remove(); 
 		
+    };
+    
+    function showDatatable() {
+        /* alert(n); */
+        /* $("#alertSuccess").remove(); */
+        
+        $.ajax( { /* récupérer la méthode AJAX */
+    		url : "rest/client/getAllDesinscris",
+    		dataType: "json",
+    		success: function( o ) {
+    			console.log( o );
+    			setDatatable(o);	
+    		},
+    		error:function( xhr, message, ex ){
+    			/* $( "body" ).alert( "Erreur requête Ajax..." ); */
+    			$( "ficheMiseAJour" ).html('<div id="alertSuccess" class="alert alert-danger text-center" role="alert">Erreur requête Ajax...</div>');
+    			console.log( message );
+    		}
+    	} );
     };
    	
     function save(isArchived) {
@@ -687,9 +711,6 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
         }
     );
     
-    /*
-     *	READY
-     */
     $(document).ready(function() {
     	
     	/*
@@ -703,7 +724,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
     	*/
 	    $("#mettreAJourClient").click( function( event ) {
 			
-			save(false);
+			save(true);
 			
 		});
     	
@@ -712,7 +733,7 @@ ArrayList<ClientsTerraBean> ctBeanCol = (ArrayList) request.getAttribute("ctBean
     	*/
 		$("#archiverClient").click( function( event ) {
 			
-			save(true);
+			save(false);
 			
 		});
 	    

@@ -28,7 +28,6 @@ public class ClientsTerraDao {
 			connexion = Database.connexion;
 			
 			ClientsTerraDao ctDao = new ClientsTerraDao();
-			ClientsTerraBean ctBean = new ClientsTerraBean();
 			
 			if (o.getId() != 0) {
 				
@@ -158,7 +157,7 @@ public class ClientsTerraDao {
 	}
 
 	// READ / RETRIEVE ALL
-	public ArrayList<ClientsTerraBean> getAll() throws DaoException {
+	public ArrayList<ClientsTerraBean> getAllAbonnes() throws DaoException {
 
 		ArrayList<ClientsTerraBean> list = new ArrayList<>();
 		Connection connexion = null;
@@ -170,6 +169,51 @@ public class ClientsTerraDao {
 			connexion = Database.connexion;
 			st = connexion.createStatement();
 			rs = st.executeQuery("SELECT * FROM clientsTerra WHERE archiver=0");
+
+			while (rs.next()) {
+
+				ClientsTerraBean o = new ClientsTerraBean();
+
+				o.setId(rs.getInt("id"));
+				o.setDateEnregistrement(rs.getDate("dateEnregistrement"));
+				o.setDateMAJ(rs.getDate("dateMAJ"));
+				o.setCivilite(rs.getInt("civilite"));
+				o.setNom(rs.getString("nom"));
+				o.setPrenom(rs.getString("prenom"));
+				o.setTel(rs.getString("tel"));
+				o.setMail(rs.getString("mail"));
+				// o.setPassword(passwordStored);
+				o.setAbonnement(rs.getInt("abonnement"));
+				o.setStatut(rs.getInt("statut"));
+				o.setArchiver(rs.getBoolean("archiver"));
+				o.setCommentaire(rs.getString("commentaire"));
+
+				list.add(o);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException("Impossible de communiquer avec la base de données.");
+		} catch (BeanException e) {
+			e.printStackTrace();
+			throw new DaoException("Les données de la base sont invalides.");
+		}
+		return list;
+	}
+	
+	// READ / RETRIEVE ALL
+	public ArrayList<ClientsTerraBean> getAllDesinscris() throws DaoException {
+
+		ArrayList<ClientsTerraBean> list = new ArrayList<>();
+		Connection connexion = null;
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+
+			connexion = Database.connexion;
+			st = connexion.createStatement();
+			rs = st.executeQuery("SELECT * FROM clientsTerra WHERE archiver=1");
 
 			while (rs.next()) {
 
@@ -384,6 +428,11 @@ public class ClientsTerraDao {
 	public String countAllNewSubscribersForATypeOfSubscriptionPerEachMonthOfTheCurrentYear(int subscriptionAJour,
 			int subscriptionEnAttente, int subscriptionBlocked) {
 
+//		SELECT COUNT(*) FROM `clientsTerra` 
+//		WHERE YEAR (`dateMAJ`) = YEAR(NOW())
+//		AND MONTH (`dateMAJ`) = MONTH(NOW())
+//		AND archiver=1
+
 		String s = "";
 		String s2 = "";
 		String s31 = "";
@@ -505,6 +554,11 @@ public class ClientsTerraDao {
 	public String countAllUnsubscribesForATypeOfSubscriptionPerEachMonthOfTheCurrentYear(int subscriptionAJour,
 			int subscriptionEnAttente, int subscriptionBlocked) {
 
+//		SELECT COUNT(*) FROM `clientsTerra` 
+//		WHERE YEAR (`dateMAJ`) = YEAR(NOW())
+//		AND MONTH (`dateMAJ`) = MONTH(NOW())
+//		AND archiver=1
+		
 		String s = "";
 		String s2 = "";
 		String s31 = "";

@@ -13,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ListAbonnes
+ * Servlet implementation class ListeDesinscriptions
  */
-public class ListAbonnes extends HttpServlet {
+public class ListeDesinscriptions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListAbonnes() {
+    public ListeDesinscriptions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +31,11 @@ public class ListAbonnes extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		Database.Connect();
 		ClientsTerraDao ctDao = new ClientsTerraDao();
 		try {
-			ArrayList<ClientsTerraBean> ctBeanCol = ctDao.getAllAbonnes();
-			// System.out.println(ctBeanCol);
+			ArrayList<ClientsTerraBean> ctBeanCol = ctDao.getAllDesinscris();
 			request.setAttribute("ctBeanCol", ctBeanCol);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +48,7 @@ public class ListAbonnes extends HttpServlet {
 		}
 		
 		request.setAttribute("activeGestionAbonnes", "active");
-		request.getRequestDispatcher("listeAbonnes.jsp").forward(request, response);
+		request.getRequestDispatcher("ListeDesinscriptions.jsp").forward(request, response);
 	}
 
 	/**

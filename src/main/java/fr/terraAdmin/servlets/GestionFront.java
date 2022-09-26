@@ -1,27 +1,28 @@
 package fr.terraAdmin.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import fr.terraAdmin.beans.ClientsTerraBean;
-import fr.terraAdmin.dao.ClientsTerraDao;
-import fr.terraAdmin.dao.DaoException;
+import fr.terraAdmin.dao.CoordonneesTerraDao;
 import fr.terraAdmin.dao.Database;
+import fr.terraAdmin.dao.LivreDOrDao;
+import fr.terraAdmin.dao.LivreDOrLogosDao;
+import fr.terraAdmin.dao.OffresDao;
+import fr.terraAdmin.dao.SliderDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ListAbonnes
+ * Servlet implementation class GestionFront
  */
-public class ListAbonnes extends HttpServlet {
+public class GestionFront extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListAbonnes() {
+    public GestionFront() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +36,24 @@ public class ListAbonnes extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		Database.Connect();
-		ClientsTerraDao ctDao = new ClientsTerraDao();
+		CoordonneesTerraDao ctDao = new CoordonneesTerraDao();
+		SliderDao sDao = new SliderDao();
+		LivreDOrDao lDao = new LivreDOrDao();
+		LivreDOrLogosDao llDao = new LivreDOrLogosDao();
+		OffresDao oDao = new OffresDao();
+		
 		try {
-			ArrayList<ClientsTerraBean> ctBeanCol = ctDao.getAllAbonnes();
-			// System.out.println(ctBeanCol);
-			request.setAttribute("ctBeanCol", ctBeanCol);
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
+
+			request.setAttribute("cb", ctDao.getById(1));
+			request.setAttribute("sbCol", sDao.getAll());
+			request.setAttribute("lbCol", lDao.getAll());
+			request.setAttribute("llbCol", llDao.getAll());
+			request.setAttribute("oCol", oDao.getAll());
+
+			// System.out.println(lDao.getAll());
+			
+		} catch (Exception e) {
+			
 			e.printStackTrace();
 			System.out.println("Dans la servlet ListAbonnes : " + e.getMessage());
 			// Dans le site vitrine dire site en maintenance
@@ -50,8 +62,8 @@ public class ListAbonnes extends HttpServlet {
 			// m’envoyer un mail car je suis le dév donc le service technique
 		}
 		
-		request.setAttribute("activeGestionAbonnes", "active");
-		request.getRequestDispatcher("listeAbonnes.jsp").forward(request, response);
+		request.setAttribute("activeGestionFront", "active");
+		request.getRequestDispatcher("gestionFront.jsp").forward(request, response);
 	}
 
 	/**

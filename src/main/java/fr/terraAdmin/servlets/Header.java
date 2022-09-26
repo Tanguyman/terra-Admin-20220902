@@ -2,6 +2,8 @@ package fr.terraAdmin.servlets;
 
 import java.io.IOException;
 
+import fr.terraAdmin.dao.CoordonneesTerraDao;
+import fr.terraAdmin.dao.DaoException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,6 +38,13 @@ public class Header extends HttpServlet {
 		for ( int i = 0, n = names.length; i < n; i++ ) {
 			String key = names[i];
 			System.out.println("Session key (Header) : " + key + "-> Session value : " + session.getValue(key));
+		}
+		
+		CoordonneesTerraDao cDao = new CoordonneesTerraDao();
+		try {
+			request.setAttribute("terra", cDao.getById(1));
+		} catch (DaoException e) {
+			e.printStackTrace();
 		}
 		
 		request.getRequestDispatcher("/header.jsp").include(request, response);

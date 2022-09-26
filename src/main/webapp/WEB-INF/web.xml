@@ -2,17 +2,17 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="5.0">
   <display-name>terra-Admin-20220902</display-name>
   <servlet>
-  	<servlet-name>RestServlet</servlet-name>
-  	<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-  	<init-param>
-  		<param-name>jersey.config.server.provider.packages</param-name>
-  		<param-value>fr.terraAdmin.daoRestfull</param-value>
-  	</init-param>
-  	<load-on-startup>1</load-on-startup>
+    <servlet-name>RestServlet</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>fr.terraAdmin.daoRestfull</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>RestServlet</servlet-name>
-  	<url-pattern>/rest/*</url-pattern>
+    <servlet-name>RestServlet</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -111,5 +111,25 @@
   <servlet-mapping>
     <servlet-name>ListAbonnes</servlet-name>
     <url-pattern>/ListAbonnes</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListeDesinscriptions</display-name>
+    <servlet-name>ListeDesinscriptions</servlet-name>
+    <servlet-class>fr.terraAdmin.servlets.ListeDesinscriptions</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeDesinscriptions</servlet-name>
+    <url-pattern>/ListeDesinscriptions</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GestionFront</display-name>
+    <servlet-name>GestionFront</servlet-name>
+    <servlet-class>fr.terraAdmin.servlets.GestionFront</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GestionFront</servlet-name>
+    <url-pattern>/GestionFront</url-pattern>
   </servlet-mapping>
 </web-app>
