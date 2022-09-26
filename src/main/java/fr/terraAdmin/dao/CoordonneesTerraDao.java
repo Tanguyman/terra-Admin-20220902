@@ -32,7 +32,8 @@ public class CoordonneesTerraDao {
 				ps.setString(2, o.getAdresse());
 				ps.setString(3, o.getTel());
 				ps.setString(4, o.getMail());
-				ps.setString(5, "img/logosTerra/Terra-Logo_1.png"); //o.getLogoURL()
+				ps.setString(5, "img/logosTerra/Terra-Logo_1.png"); 
+				// "http://localhost:8080/terra-Admin-20220902/img/" + o.getLogoURL()
 				ps.setBoolean(6, o.isArchiver());
 
 				ps.setInt(7, o.getId());
